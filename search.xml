@@ -8,7 +8,7 @@
       <link href="/2022/03/31/Spring5/"/>
       <url>/2022/03/31/Spring5/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="Spring简介"><a href="#Spring简介" class="headerlink" title="Spring简介"></a>Spring简介</h1><p>Spring的理念是使现有的技术更容易使用，本身是大杂烩，整合了现有的技术框架。</p><ul><li><p>Spring是一个开源免费的框架</p></li><li><p>Spring是一个轻量级的框架 , 非侵入式的</p></li><li><p>控制反转 IoC  , 面向切面 Aop</p></li><li><p>对事物的支持 , 对框架的支持</p></li></ul><p><strong>总结：Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器（框架）。</strong></p>]]></content>
       
       
       
