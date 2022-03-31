@@ -4,17 +4,17 @@
   
     
     <entry>
-      <title>Mybatis问题</title>
-      <link href="/2022/03/27/Mybatis%E9%97%AE%E9%A2%98/"/>
-      <url>/2022/03/27/Mybatis%E9%97%AE%E9%A2%98/</url>
+      <title>Spring5</title>
+      <link href="/2022/03/31/Spring5/"/>
+      <url>/2022/03/31/Spring5/</url>
       
-        <content type="html"><![CDATA[<h1 id="错误点"><a href="#错误点" class="headerlink" title="错误点"></a>错误点</h1><p>在mapper里面老是容易忘记写全限定名，就会出现如下错误</p><img src="/2022/03/27/Mybatis%E9%97%AE%E9%A2%98/1.jpg" class="">]]></content>
+        <content type="html"><![CDATA[]]></content>
       
       
       
         <tags>
             
-            <tag> Mybatis </tag>
+            <tag> Spring </tag>
             
         </tags>
       
