@@ -4,11 +4,30 @@
   
     
     <entry>
+      <title>Linux学习</title>
+      <link href="/2022/04/13/Linux%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2022/04/13/Linux%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sync # 将数据由内存同步到硬盘中。</span><br><span class="line"></span><br><span class="line">shutdown # 关机指令，你可以man shutdown 来看一下帮助文档。例如你可以运行如下命令关机：</span><br><span class="line"></span><br><span class="line">shutdown –h 10 # 这个命令告诉大家，计算机将在10分钟后关机</span><br><span class="line"></span><br><span class="line">shutdown –h now # 立马关机</span><br><span class="line"></span><br><span class="line">shutdown –h 20:25 # 系统会在今天20:25关机</span><br><span class="line"></span><br><span class="line">shutdown –h +10 # 十分钟后关机</span><br><span class="line"></span><br><span class="line">shutdown –r now # 系统立马重启</span><br><span class="line"></span><br><span class="line">shutdown –r +10 # 系统十分钟后重启</span><br><span class="line"></span><br><span class="line">reboot # 就是重启，等同于 shutdown –r now</span><br><span class="line"></span><br><span class="line">halt # 关闭系统，等同于shutdown –h now 和 poweroff</span><br></pre></td></tr></table></figure><p><strong>不管是重启系统还是关闭系统，首先要运行 sync 命令，把内存中的数据写到磁盘中。</strong></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Spring5</title>
       <link href="/2022/03/31/Spring5/"/>
       <url>/2022/03/31/Spring5/</url>
       
-        <content type="html"><![CDATA[<h1 id="Spring简介"><a href="#Spring简介" class="headerlink" title="Spring简介"></a>Spring简介</h1><p>Spring的理念是使现有的技术更容易使用，本身是大杂烩，整合了现有的技术框架。</p><ul><li><p>Spring是一个开源免费的框架</p></li><li><p>Spring是一个轻量级的框架 , 非侵入式的</p></li><li><p>控制反转 IoC  , 面向切面 Aop</p></li><li><p>对事物的支持 , 对框架的支持</p></li></ul><p><strong>总结：Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器（框架）。</strong></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Spring简介"><a href="#Spring简介" class="headerlink" title="Spring简介"></a>Spring简介</h1><p>Spring的理念是使现有的技术更容易使用，本身是大杂烩，整合了现有的技术框架。</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul><li><p>Spring是一个开源免费的框架</p></li><li><p>Spring是一个轻量级的框架 , 非侵入式的</p></li><li><p>控制反转 IoC  , 面向切面 Aop</p></li><li><p>对事物的支持 , 对框架的支持</p></li></ul><p><strong>总结：Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器（框架）。</strong></p>]]></content>
       
       
       
