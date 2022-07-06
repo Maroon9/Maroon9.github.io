@@ -419,7 +419,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">appendon1y no   <span class="comment">#默认是不开启aof模式的，默认是使用rdb方式持久化的，在大部分所有的情况下，rdb完全够用</span></span><br><span class="line">appendfilename <span class="string">&quot;appendonly.aof&quot;</span>  <span class="comment">#持久化文件的名字</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#appendfsync always   #每次修改都会sync。消耗性能</span></span><br><span class="line">appendfsync everysec  <span class="comment">#每秒执行一次sync，可能会丢失这1s的数据</span></span><br><span class="line"><span class="comment">#appendfsync no   #不执行sync，这个时候操作系统自己同步数据，速度最快</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h1><p>Redis是内存数据库，如果不将内存中的数据库状态保存到磁盘，那么一旦服务器进程退出，服务器中的数据库状态也会消失。所以Redis提供了持久化功能。</p>
-<h2 id="RDB-Redis-DataBase"><a href="#RDB-Redis-DataBase" class="headerlink" title="RDB ( Redis DataBase )"></a>RDB ( Redis DataBase )</h2><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/2.jpg" class="">
+<h2 id="RDB-Redis-DataBase"><a href="#RDB-Redis-DataBase" class="headerlink" title="RDB ( Redis DataBase )"></a>RDB ( Redis DataBase )</h2><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/2.jpg" class>
 
 <p>在指定的时间间隔内将内存中的数据集快照写入磁盘，也就是行话讲的Snapshot快照，它恢复时是将快照文件直接读到内存里。</p>
 <p>Redis会单独创建 ( fork)一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的。这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化后的数据可能丢失。默认的就是RDB，一般情况下不需要修改这个配置.</p>
@@ -450,7 +450,7 @@
 <blockquote>
 <p>是什么</p>
 </blockquote>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/3.jpg" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/3.jpg" class>
 
 <p>以日志的形式来记录每个写操作，将Redis执行过的所有指令记录下来(读操作不记录），只许追加文件但不可以改写文件，redis启动之初会读取该文件重新构建数据，换言之，redis重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作</p>
 <p><strong>Aof保存的是appendonly.aof文件</strong></p>
@@ -471,13 +471,13 @@
 <h1 id="Redis发布订阅"><a href="#Redis发布订阅" class="headerlink" title="Redis发布订阅"></a>Redis发布订阅</h1><p>Redis发布订阅(pub&#x2F;sub)是一种消息通信模式∶发送者(pub)发送消息，订阅者(sub)接收消息。微信、微博、关注系统。</p>
 <p>Redis客户端可以订阅任意数量的频道。</p>
 <p>订阅&#x2F;发布消息图∶</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/4.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/4.png" class>
 
 <p>下图展示了频道channel1，以及订阅这个频道的三个客户端―— client2、client5和client1之间的关系∶</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/5.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/5.png" class>
 
 <p>当有新消息通过PUBLISH命令发送给频道channel1时，这个消息就会被发送给订阅它的三个客户端︰</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/6.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/6.png" class>
 
 <p>订阅端：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SUBSCRIBE w   <span class="comment"># 订阅一个频道w</span></span><br><span class="line">Reading messages. . . (press ctr1-c to quit</span><br><span class="line">1) <span class="string">&quot;subscribe&quot;</span></span><br><span class="line">2) <span class="string">&quot;w&quot;</span></span><br><span class="line">3) (<span class="built_in">integer</span>) 1</span><br><span class="line"><span class="comment">#等待读取推送的信息</span></span><br><span class="line">1) <span class="string">&quot;message&quot;</span>  <span class="comment">#消息</span></span><br><span class="line">2) <span class="string">&quot;w&quot;</span>   <span class="comment">#哪个频道的消息</span></span><br><span class="line">3) <span class="string">&quot;he11o&quot;</span>   <span class="comment">#消息的具体内容</span></span><br><span class="line">1) <span class="string">&quot;message&quot;</span></span><br><span class="line">2) <span class="string">&quot;w&quot;</span></span><br><span class="line">3) <span class="string">&quot;hello,redis&quot;</span></span><br></pre></td></tr></table></figure>
@@ -508,7 +508,7 @@
 </ol>
 <p>电商网站上的商品，一般都是一次上传，无数次浏览的，说专业点也就是”多读少写”。</p>
 <p>对于这种场景，可以使用如下架构：</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/7.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/7.png" class>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; info replication   <span class="comment">#查看当前库的信息</span></span><br><span class="line"><span class="comment"># Replication</span></span><br><span class="line">role:master   <span class="comment">#角色  master</span></span><br><span class="line">connected_slaves:0   <span class="comment">#没有从机</span></span><br><span class="line">master_failover_state:no-failover</span><br><span class="line">master_replid:e1898b9410ce62b2f39ede99279537b8a2e2f8aa</span><br><span class="line">master_replid2:0000000000000000000000000000000000000000</span><br><span class="line">master_repl_offset:0</span><br><span class="line">second_repl_offset:-1</span><br><span class="line">repl_backlog_active:0</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:0</span><br><span class="line">repl_backlog_histlen:0</span><br></pre></td></tr></table></figure>
 
@@ -526,7 +526,7 @@
 <p>主从切换技术的方法是︰当主服务器宕机后，需要手动把一台从服务器切换为主服务器，这就需要人工干预，费事费力，还会造成一段时间内服务不可用。这不是一种推荐的方式，更多时候，我们优先考虑哨兵模式。Redis从2.8开始正式提供了Sentinel (哨兵）架构来解决这个问题。</p>
 <p>谋朝篡位的自动版，能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库。</p>
 <p>哨兵模式是一种特殊的模式，首先Redis提供了哨兵的命令，哨兵是一个独立的进程，作为进程，它会独立运行。其原理是<strong>哨兵通过发送命令，等待Redis服务器响应，从而监控运行的多个Redis实例。</strong></p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/8.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/8.png" class>
 
 <p>这里的哨兵有两个作用</p>
 <ul>
@@ -536,7 +536,7 @@
 </li>
 </ul>
 <p>然而一个哨兵进程对Redis服务器进行监控，可能会出现问题，为此，我们可以使用多个哨兵进行监控。各个哨兵之间还会进行监控，这样就形成了多哨兵模式。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/9.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/9.png" class>
 
 <p>假设主服务器宕机，哨兵1先检测到这个结果，系统并不会马上进行failover过程，仅仅是哨兵1主观的认为主服务器不可用，这个现象成为<strong>主观下线</strong>。当后面的哨兵也检测到主服务器不可用，并且数量达到一定值时，那么哨兵之间就会进行一次投票，投票的结果由一个哨兵发起，进行failover[故障转移]操作。切换成功后，就会通过发布订阅模式，让各个哨兵把自己监控的从服务器实现切换主机，这个过程称为<strong>客观下线</strong>。</p>
 <p>1、配置哨兵配置文件sentinel.conf</p>
@@ -555,11 +555,11 @@
 </blockquote>
 <p><strong>布隆过滤器</strong></p>
 <p>布隆过滤器是一种数据结构，对所有可能查询的参数以hash形式存储，在控制层先进行校验，不符合则丢弃，从而避免了对底层存储系统的查询压力。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/10.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/10.png" class>
 
 <p><strong>缓存空对象</strong></p>
 <p>当存储层不命中后，即使返回的空对象也将其缓存起来，同时会设置一个过期时间，之后再访问这个数据将会从缓存中获取，保护了后端数据源。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/11.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/11.png" class>
 
 <p>但是这种方法会存在两个问题:</p>
 <ol>
@@ -585,7 +585,7 @@
 </blockquote>
 <p>缓存雪崩，是指在某一个时间段，缓存集中过期失效。Redis宕机</p>
 <p>产生雪崩的原因之一，比如在写本文的时候，马上就要到双十二零点，很快就会迎来一波抢购，这波商品时间比较集中的放入了缓存，假设缓存一个小时。那么到了凌晨一点钟的时候，这批商品的缓存就都过期了。而对这批商品的访问查询，都落到了数据库上，对于数据库而言，就会产生周期性的压力波峰。于是所有的请求都会达到存储层，存储层的调用量会暴增，造成存储层也会挂掉的情况。</p>
-<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2022/04/14/Redis%E5%AD%A6%E4%B9%A0/12.png" class="">
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/.com//04/14/Redis%E5%AD%A6%E4%B9%A0/12.png" class>
 
 <p>其实集中过期，倒不是非常致命，比较致命的缓存雪崩，是缓存服务器某个节点宕机或断网。因为自然形成的缓存雪崩，一定是在某个时间段集中创建缓存，这个时候，数据库也是可以顶住压力的。无非就是对数据库产生周期性的压力而已。而缓存服务节点的宕机，对数据库服务器造成的压力是不可预知的，很有可能瞬间就把数据库压垮。</p>
 <blockquote>
