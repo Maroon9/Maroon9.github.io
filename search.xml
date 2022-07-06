@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>ces</title>
+      <link href="/2022/07/06/ces/"/>
+      <url>/2022/07/06/ces/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Docker的基本组成"><a href="#Docker的基本组成" class="headerlink" title="Docker的基本组成"></a>Docker的基本组成</h3><p><img src="/.com//Blog\source_posts\Docker学习\1.jpg" alt="image-20220703231236493"></p><p><strong>镜像( image ) :</strong></p><p>docker镜像就好比是一个模板，可以通过这个模板来创建容器服务，tomcat镜像-&#x3D;&#x3D;&gt; run &#x3D;&#x3D;&gt; tomcat01容器(提供服务器)，通过这个镜像可以创建多个容器（最终服务运行或者项目运行就是在容器中)。</p><p><strong>容器( container ) :</strong></p><p>Docker利用容器技术，独立运行一个或者一个组应用，通过镜像来创建的。</p><p>启动，停止，删除，等基本命令</p><p>可以把这个容器理解为一</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker学习</title>
       <link href="/2022/07/03/Docker%E5%AD%A6%E4%B9%A0/"/>
       <url>/2022/07/03/Docker%E5%AD%A6%E4%B9%A0/</url>
